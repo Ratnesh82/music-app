@@ -1,0 +1,16 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow public read access to tracks collection
+    match /tracks/{trackId} {
+      allow read: if true;  // Anyone can read tracks
+      allow write: if false; // No one can write (for now)
+    }
+    
+    // Default deny all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Allow public read access to audio and artwork files
+    match /{allPaths=**} {
+      allow read: if true;  // Anyone can read files
+      allow write: if false; // No one can write (for now)
+    }
+  }
+}
